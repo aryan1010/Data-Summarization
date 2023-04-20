@@ -1,7 +1,7 @@
 import requests
 from flask import Flask,render_template,url_for
 from flask import request as req
-
+import re
 
 app = Flask(__name__)
 @app.route("/",methods=["GET","POST"])
@@ -12,9 +12,11 @@ def Index():
 def Summarize():
     if req.method== "POST":
         API_URL = "https://api-inference.huggingface.co/models/facebook/bart-large-cnn"
-        headers = {"Authorization": f"Bearer api_cDqsshiYYdsPmHybqxvnlZYIctoHFwMovw"}
+        headers = {"Authorization": f"Bearer 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"}
 
         data=req.form["data"]
+        pattern ='[^\”\“\"]+'
+        c=re.findall(pattern,data)
 
         maxL=int(req.form["maxL"])
         minL=maxL//4
